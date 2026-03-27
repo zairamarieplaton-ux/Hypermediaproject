@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Guided Hypermedia Module | Pamumuhay ng mga Unang Tao sa Daigdig</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{--primary:#5c2d0a;--secondary:#c9921a;--accent:#e8d5a3;--bg:#fdf8f0;--text:#1a0e00;--light:#fff8ee;--line:#d4b896;--green:#2d6a4f;--rust:#9c3117;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:14px;}
+.nf{background:rgba(92,45,10,.9);border-bottom:1px solid rgba(255,255,255,.12);padding:6px 16px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:10px;}
+.nf a{color:#e8c97a;text-decoration:none;font-weight:600;padding:3px 10px;border:1px solid rgba(232,201,122,.4);border-radius:20px;transition:all .2s;}
+.nf a:hover{background:rgba(232,201,122,.2);}
+.nf span{color:rgba(255,255,255,.5);}
+nav{background:var(--primary);color:#fff;display:flex;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+nav .brand{padding:11px 16px;font-weight:700;font-size:.88rem;border-right:1px solid rgba(255,255,255,.2);white-space:nowrap;}
+nav a{color:#fff;text-decoration:none;padding:11px 12px;font-size:.78rem;transition:background .2s;white-space:nowrap;}
+nav a:hover{background:rgba(255,255,255,.15);}
+.hero{background:linear-gradient(135deg,var(--primary),#a0522d,var(--secondary));color:#fff;padding:44px 36px 36px;text-align:center;}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);padding:4px 14px;border-radius:20px;font-size:.72rem;letter-spacing:.08em;margin-bottom:14px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:900;margin-bottom:9px;}
+.hero p{font-size:.9rem;opacity:.9;max-width:580px;margin:0 auto 5px;}
+.hero .meta{font-size:.76rem;opacity:.75;margin-top:7px;}
+.pw{background:rgba(255,255,255,.2);border-radius:20px;height:7px;margin-top:14px;max-width:480px;margin-left:auto;margin-right:auto;}
+.pb{height:100%;border-radius:20px;background:var(--secondary);transition:width .6s;width:5%;}
+.cnt{max-width:880px;margin:0 auto;padding:32px 18px;}
+.card{background:var(--light);border-left:5px solid var(--secondary);border-radius:10px;padding:26px 26px 20px;margin-bottom:28px;box-shadow:0 2px 10px rgba(92,45,10,.08);}
+.card .cl{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--secondary);font-weight:700;margin-bottom:4px;}
+.card h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--primary);margin-bottom:11px;border-bottom:1px solid var(--accent);padding-bottom:7px;}
+.card h3{font-size:.96rem;color:var(--primary);margin:16px 0 6px;}
+.card p{margin-bottom:9px;}
+.card ul,.card ol{margin:5px 0 11px 19px;}
+.card li{margin-bottom:4px;}
+.dq{background:var(--primary);color:#fff;border-radius:9px;padding:16px 22px;margin:12px 0;font-size:.95rem;font-weight:600;text-align:center;}
+.dq span{display:block;font-size:.68rem;font-weight:400;opacity:.8;margin-bottom:4px;letter-spacing:.08em;text-transform:uppercase;}
+.nb{background:var(--accent);border-radius:7px;padding:11px 15px;font-size:.83rem;margin-top:12px;}
+.nb strong{display:block;margin-bottom:4px;color:var(--primary);}
+.nb ol{margin-left:17px;}
+.rl{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--accent);border-radius:7px;padding:10px 13px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:box-shadow .2s,border-color .2s;}
+.rl:hover{box-shadow:0 3px 11px rgba(92,45,10,.18);border-color:var(--secondary);}
+.rl .ico{width:32px;height:32px;background:var(--primary);color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.rl .inf strong{display:block;font-size:.82rem;color:var(--primary);}
+.rl .inf span{font-size:.72rem;color:#7a5c3a;}
+.vw{position:relative;padding-bottom:56.25%;height:0;border-radius:9px;overflow:hidden;margin:13px 0;box-shadow:0 3px 13px rgba(0,0,0,.14);}
+.vw iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+.vc{font-size:.71rem;color:#7a5c3a;text-align:center;margin-top:3px;margin-bottom:13px;}
+.tl{position:relative;padding-left:26px;margin:13px 0;}
+.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--primary),var(--secondary));border-radius:2px;}
+.tli{position:relative;margin-bottom:18px;}
+.tli::before{content:'';position:absolute;left:-21px;top:5px;width:12px;height:12px;background:var(--secondary);border:3px solid var(--primary);border-radius:50%;}
+.tli .pr{font-size:.7rem;font-weight:700;color:var(--secondary);text-transform:uppercase;letter-spacing:.06em;}
+.tli .en{font-weight:700;color:var(--primary);}
+.tli p{font-size:.86rem;margin-top:2px;}
+table.kt{width:100%;border-collapse:collapse;margin:11px 0;font-size:.83rem;}
+table.kt th{background:var(--primary);color:#fff;padding:8px 11px;text-align:left;}
+table.kt td{padding:8px 11px;border-bottom:1px solid var(--accent);vertical-align:top;}
+table.kt tr:nth-child(even) td{background:var(--accent);}
+.qb{background:linear-gradient(135deg,var(--primary),#a0522d);color:#fff;border-radius:9px;padding:17px 20px;margin:18px 0;}
+.qb .ql{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+.qb p{font-weight:600;font-size:.92rem;margin-bottom:11px;}
+.opts{display:flex;flex-direction:column;gap:6px;}
+.obtn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);color:#fff;border-radius:7px;padding:8px 13px;cursor:pointer;text-align:left;font-size:.84rem;transition:background .2s,transform .1s;font-family:inherit;}
+.obtn:hover:not(:disabled){background:rgba(255,255,255,.28);transform:translateX(3px);}
+.obtn.correct{background:#2d6a4f;border-color:#2ecc71;}
+.obtn.wrong{background:#7c1e11;border-color:#e74c3c;}
+.obtn:disabled{cursor:default;}
+.fb{margin-top:7px;font-size:.82rem;font-weight:600;min-height:18px;}
+.hb{background:var(--accent);border:2px solid var(--secondary);border-radius:9px;padding:18px 20px;margin:16px 0;}
+.hb .hl{display:inline-block;background:var(--secondary);color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 11px;border-radius:11px;margin-bottom:8px;}
+.hb h3{color:var(--primary);margin-bottom:8px;font-size:.92rem;}
+.hb p,.hb ol{font-size:.86rem;margin-bottom:6px;}
+.hb ol{margin-left:17px;}
+textarea.hi{width:100%;min-height:88px;border:1.5px solid var(--secondary);border-radius:7px;padding:8px 11px;font-family:inherit;font-size:.86rem;background:var(--light);color:var(--text);margin-top:9px;resize:vertical;}
+textarea.hi:focus{outline:2px solid var(--primary);}
+.sb{display:inline-block;margin-top:7px;background:var(--primary);color:#fff;border:none;border-radius:7px;padding:7px 18px;font-size:.82rem;cursor:pointer;transition:background .2s;font-family:inherit;}
+.sb:hover{background:#a0522d;}
+.ib{background:#fff3cd;border:1px solid #f0c040;border-left:4px solid #f0a020;border-radius:7px;padding:10px 15px;margin:11px 0;font-size:.85rem;}
+.ib strong{color:#7a5300;}
+#certSec{display:none;}
+.cw{max-width:680px;margin:0 auto;background:#fff;border:8px solid var(--primary);border-radius:14px;padding:46px 38px;text-align:center;position:relative;overflow:hidden;box-shadow:0 8px 36px rgba(92,45,10,.24);}
+.cw::before{content:'';position:absolute;inset:11px;border:2px solid var(--secondary);border-radius:7px;pointer-events:none;}
+.cw .seal{font-size:3.6rem;margin-bottom:9px;}
+.cw h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--primary);text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px;}
+.cw .ct{font-family:'Playfair Display',serif;font-size:1.85rem;color:var(--secondary);font-weight:900;margin:14px 0 7px;}
+.cw .cs{font-size:.87rem;color:#555;margin-bottom:18px;}
+.cw .sn{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--primary);border-bottom:2px solid var(--secondary);display:inline-block;padding:0 26px 5px;margin:7px 0 18px;}
+.cw .cl2{font-size:.92rem;color:var(--text);margin-bottom:22px;}
+.csig{display:flex;justify-content:space-around;margin-top:26px;font-size:.78rem;}
+.csig div{text-align:center;}
+.csig .sl{border-top:1.5px solid var(--primary);width:130px;margin:0 auto 4px;}
+.cc{font-size:1.4rem;animation:bounce 1s infinite alternate;display:inline-block;margin:0 4px;}
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-9px);}}
+.pbtn{background:var(--primary);color:#fff;border:none;border-radius:7px;padding:11px 24px;font-size:.9rem;cursor:pointer;margin-top:18px;font-family:inherit;transition:background .2s;}
+.pbtn:hover{background:#a0522d;}
+input.ni{width:260px;border:2px solid var(--secondary);border-radius:7px;padding:8px 13px;font-size:.95rem;font-family:'Playfair Display',serif;text-align:center;color:var(--primary);background:var(--light);}
+input.ni:focus{outline:2px solid var(--primary);}
+.cs-screen{background:linear-gradient(135deg,var(--primary),#a0522d,var(--secondary));color:#fff;border-radius:13px;padding:36px 28px;text-align:center;margin-bottom:26px;}
+.cs-screen h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:11px;}
+.cs-screen p{opacity:.9;margin-bottom:14px;font-size:.92rem;}
+.cg-btn{background:#fff;color:var(--primary);border:none;border-radius:9px;padding:11px 26px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .2s,box-shadow .2s;}
+.cg-btn:hover{transform:scale(1.04);box-shadow:0 4px 18px rgba(0,0,0,.18);}
+footer{background:var(--primary);color:rgba(255,255,255,.8);text-align:center;padding:18px 14px;font-size:.78rem;}
+@media(max-width:580px){.hero{padding:32px 16px;}.hero h1{font-size:1.4rem;}.card{padding:16px 13px;}}
+@media print{nav,.nf,#certSec .pbtn,#certSec input{display:none!important;}.cw{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="nf">
+  <span>&#x1F4C1; Files:</span>
+  <a href="dlp.html">&#x1F4CB; DLP</a>
+  <a href="resource_based_project.html">&#x1F4DA; Resource-Based</a>
+  <a href="simple_creation_infographic.html">&#x1F3A8; Infographic</a>
+  <a href="Guided_Hypermedia_Pamumuhay_ng_mga_Unang_Tao.html" style="background:rgba(232,201,122,.25);">&#x1F310; Hypermedia (Kasalukuyan)</a>
+</div>
+<nav>
+  <div class="brand">&#x1F4DC; AP8 Hypermedia Module</div>
+  <a href="#intro">Panimula</a>
+  <a href="#s1">Bahagi 1</a>
+  <a href="#s2">Bahagi 2</a>
+  <a href="#s3">Bahagi 3</a>
+  <a href="#hots">HOTS</a>
+  <a href="#refs">Sanggunian</a>
+</nav>
+<div class="hero">
+  <div class="badge">BAITANG 8 &#xB7; ARALING PANLIPUNAN &#xB7; AP8HSK-Ie-5</div>
+  <h1>Pamumuhay ng mga Unang Tao sa Daigdig</h1>
+  <p>Isang Guided Hypermedia Learning Module na nagtataguyod ng Higher Order Thinking Skills</p>
+  <p class="meta">Ginawa nina: <strong>Jhuanna Mae Robles, Zaira Marie Platon, at Mary Joy Ladan</strong> &#xB7; BSED SOCSTUD 3<br/>Instructor: <strong>Ivan Rapada</strong></p>
+  <div class="pw"><div class="pb" id="pgbar"></div></div>
+</div>
+<div class="cnt">
+
+<div class="card" id="intro">
+  <div class="cl">Seksyon 0 &#xB7; Panimula</div>
+  <h2>&#x1F3D5;&#xFE0F; Tungkol sa Modyul na Ito</h2>
+  <div class="dq"><span>Driving Question</span>"Paano nakaangkop at nabago ang pamumuhay ng mga unang tao sa daigdig batay sa kanilang kapaligiran, at paano ito nagbigay-hugis sa mga sinaunang kabihasnan?"</div>
+  <h3>Pamantayan sa Pagkatuto</h3>
+  <table class="kt">
+    <tr><th>Pamantayan</th><th>Detalye</th></tr>
+    <tr><td><strong>Pangnilalamanan</strong></td><td>Naipamamalas ang pag-unawa sa interaksiyon ng tao sa kapaligiran na nagbigay-daan sa pag-usbong ng mga sinaunang kabihasnan.</td></tr>
+    <tr><td><strong>Pagganap</strong></td><td>Nakabubuo ng panukalang proyektong nagsusulong sa pangangalaga at preserbasyon ng mga pamana ng mga sinaunang kabihasnan.</td></tr>
+    <tr><td><strong>Kompetensya</strong></td><td>Naipaliliwanag ang uri ng pamumuhay ng mga unang tao sa daigdig. <em>(AP8HSK-Ie-5)</em></td></tr>
+  </table>
+  <div class="nb">
+    <strong>&#x1F4CC; Gabay sa Pag-navigate</strong>
+    <ol>
+      <li>Basahin ang bawat seksyon sunod-sunod mula <strong>Bahagi 1</strong> hanggang <strong>Bahagi 3</strong>.</li>
+      <li>I-click ang mga <strong>hyperlink</strong> &#x2014; lahat ay tunay na websites na maaaring bisitahin.</li>
+      <li>Panoorin ang <strong>embedded na videos</strong> sa bawat bahagi.</li>
+      <li>Sagutin ang mga <strong>interactive na katanungan</strong> pagkatapos ng bawat bahagi.</li>
+      <li>Tapusin ang <strong>HOTS Gawain</strong> at kunin ang iyong <strong>Certificate of Completion!</strong></li>
+    </ol>
+  </div>
+</div>
+
+<div class="card" id="s1">
+  <div class="cl">Seksyon 1 &#xB7; Bahagi 1</div>
+  <h2>&#x1F9B4; Mga Unang Tao at ang Kanilang Mundo</h2>
+  <p>Ang mga pinakasinaunang ninuno ng tao ay nabuhay sa Africa mga <strong>2&#x2013;3 milyong taon na ang nakaraan</strong>. Ang mga ito ay tinatawag na <em>hominids</em> &#x2014; mga nilalang na may katulad na katangian sa modernong tao ngunit naiiba pa rin sa maraming aspeto.</p>
+  <h3>Mga Pangunahing Uri ng Sinaunang Tao</h3>
+  <div class="tl">
+    <div class="tli"><div class="pr">~2.4 Milyong Taon Nakaraan</div><div class="en">Homo Habilis &#x2014; "Handy Man"</div><p>Unang kilalang miyembro ng genus <em>Homo</em>. Natuklasan sa Tanzania at Ethiopia. Nakalikha ng mga simpleng kasangkapan mula sa bato. Nomadic at nangangalap ng pagkain.</p></div>
+    <div class="tli"><div class="pr">~1.8 Milyong Taon Nakaraan</div><div class="en">Homo Erectus &#x2014; "Upright Man"</div><p>Unang tao na lumabas sa Africa patungong Asya at Europa. Natuklasan ang paggamit ng apoy. Nagsimulang gumawa ng mas advanced na kasangkapan.</p></div>
+    <div class="tli"><div class="pr">~300,000 Taon Nakaraan</div><div class="en">Homo Sapiens &#x2014; "Wise Man"</div><p>Ang modernong tao. Nagtaglay ng malaking utak at sopistikadong kakayahan sa pag-iisip. Nakalikha ng sining, kultura, wika, at kumplikadong lipunan.</p></div>
+  </div>
+  <h3>Ang Tatlong Panahon ng Bato</h3>
+  <table class="kt">
+    <tr><th>Panahon</th><th>Tagal</th><th>Katangian</th></tr>
+    <tr><td><strong>Paleolitiko</strong> (Lumang Bato)</td><td>2.5M&#x2013;10,000 BCE</td><td>Nomadic, mangangaso, magaspang na kasangkapan, natuklasan ang apoy.</td></tr>
+    <tr><td><strong>Mesolitiko</strong> (Gitnang Bato)</td><td>10,000&#x2013;7,000 BCE</td><td>Transisyon; mas pinino ang kasangkapan; nagsimulang mag-alaga ng hayop.</td></tr>
+    <tr><td><strong>Neolitiko</strong> (Bagong Bato)</td><td>7,000&#x2013;3,000 BCE</td><td>Rebolusyon sa Agrikultura; permanenteng komunidad; mas sopistikadong kultura.</td></tr>
+  </table>
+  <h3>&#x1F3AC; Video 1: Human Evolution &#x2014; Crash Course Big History #6</h3>
+  <div class="vw"><iframe src="https://www.youtube.com/embed/UPggkvB9_dc" title="Human Evolution: Crash Course Big History #6" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <p class="vc">&#x1F4F9; CrashCourse. (2014, August 11). <em>Human evolution: Crash Course Big History #6</em> [Video]. YouTube. https://www.youtube.com/watch?v=UPggkvB9_dc</p>
+  <h3>&#x1F517; Mga Tunay na Sanggunian Online</h3>
+  <a class="rl" href="https://humanorigins.si.edu/education/introduction-human-evolution" target="_blank" rel="noopener"><div class="ico">&#x1F3DB;&#xFE0F;</div><div class="inf"><strong>Smithsonian: Introduction to Human Evolution</strong><span>humanorigins.si.edu/education/introduction-human-evolution</span></div></a>
+  <a class="rl" href="https://humanorigins.si.edu/evidence" target="_blank" rel="noopener"><div class="ico">&#x1F9B4;</div><div class="inf"><strong>Smithsonian: Human Evolution Evidence (Fossils)</strong><span>humanorigins.si.edu/evidence</span></div></a>
+  <a class="rl" href="https://www.britannica.com/topic/Stone-Age" target="_blank" rel="noopener"><div class="ico">&#x1F4D6;</div><div class="inf"><strong>Britannica: The Stone Age</strong><span>britannica.com/topic/Stone-Age</span></div></a>
+  <div class="qb" id="q1">
+    <div class="ql">&#x270F;&#xFE0F; Katanungan 1</div>
+    <p>Alin ang unang miyembro ng genus <em>Homo</em> na nakalikha ng simpleng kasangkapan mula sa bato?</p>
+    <div class="opts">
+      <button class="obtn" onclick="chk(this,'q1',false)">A. Homo Sapiens</button>
+      <button class="obtn" onclick="chk(this,'q1',true)">B. Homo Habilis</button>
+      <button class="obtn" onclick="chk(this,'q1',false)">C. Homo Erectus</button>
+      <button class="obtn" onclick="chk(this,'q1',false)">D. Australopithecus</button>
+    </div><div class="fb" id="fb-q1"></div>
+  </div>
+  <div class="qb" id="q2">
+    <div class="ql">&#x270F;&#xFE0F; Katanungan 2</div>
+    <p>Anong malaking pagbabago ang nagdulot ng Neolitikong Rebolusyon?</p>
+    <div class="opts">
+      <button class="obtn" onclick="chk(this,'q2',false)">A. Natuklasan ang apoy.</button>
+      <button class="obtn" onclick="chk(this,'q2',false)">B. Lumipat sila mula Africa.</button>
+      <button class="obtn" onclick="chk(this,'q2',true)">C. Nagsimulang magtanim at manirahan nang permanente.</button>
+      <button class="obtn" onclick="chk(this,'q2',false)">D. Nagsimulang gumamit ng metal.</button>
+    </div><div class="fb" id="fb-q2"></div>
+  </div>
+</div>
+
+<div class="card" id="s2">
+  <div class="cl">Seksyon 2 &#xB7; Bahagi 2</div>
+  <h2>&#x1F3F9; Paraan ng Pamumuhay ng mga Sinaunang Tao</h2>
+  <p>Ang pamumuhay ng mga unang tao ay lubos na nakadepende sa <strong>kalikasan</strong> at <strong>kapaligiran</strong>.</p>
+  <h3>A. Pangangaso at Pangangalap (Hunter-Gatherer)</h3>
+  <ul><li>Nomadic ang pamumuhay &#x2014; lumilipat kasunod ng hayop at panahon.</li><li>Walang permanenteng tirahan &#x2014; natutulog sa mga yungib o pansamantaling silungan.</li><li>Maliit na grupo &#x2014; karaniwang 20&#x2013;50 miyembro.</li><li>Ginamit ang simpleng kasangkapan ng bato, buto, at kahoy.</li></ul>
+  <h3>B. Pagtuklas ng Apoy</h3>
+  <ul><li>Magluto ng pagkain &#x2014; nagpababa ng panganib ng sakit.</li><li>Magbigay ng init sa malamig na lugar.</li><li>Magtaboy ng mga mabangis na hayop.</li><li>Magbigay ng liwanag sa gabi.</li></ul>
+  <h3>C. Rebolusyon sa Agrikultura</h3>
+  <ul><li><strong>Permanenteng komunidad</strong> &#x2014; nagsimulang magtayo ng mga nayon.</li><li><strong>Surplus na pagkain</strong> &#x2014; nagbigay ng pagkakataon para sa pag-unlad ng kultura.</li><li><strong>Dibisyon ng trabaho</strong> &#x2014; nag-espesyalisa sa iba&#39;t ibang hanapbuhay.</li></ul>
+  <h3>&#x1F3AC; Video 2: The Agricultural Revolution &#x2014; Crash Course World History #1</h3>
+  <div class="vw"><iframe src="https://www.youtube.com/embed/Yocja_N5s1I" title="The Agricultural Revolution: Crash Course World History #1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <p class="vc">&#x1F4F9; CrashCourse. (2012, January 26). <em>The agricultural revolution: Crash Course World History #1</em> [Video]. YouTube. https://www.youtube.com/watch?v=Yocja_N5s1I</p>
+  <h3>&#x1F517; Mga Tunay na Sanggunian Online</h3>
+  <a class="rl" href="https://www.worldhistory.org/article/991/prehistoric-hunter-gatherer-societies/" target="_blank" rel="noopener"><div class="ico">&#x1F3F9;</div><div class="inf"><strong>World History Encyclopedia: Prehistoric Hunter-Gatherer Societies</strong><span>worldhistory.org/article/991/prehistoric-hunter-gatherer-societies</span></div></a>
+  <a class="rl" href="https://www.khanacademy.org/humanities/world-history/world-history-beginnings/birth-agriculture-neolithic-revolution/a/where-did-agriculture-come-from" target="_blank" rel="noopener"><div class="ico">&#x1F33E;</div><div class="inf"><strong>Khan Academy: Where Did Agriculture Come From?</strong><span>khanacademy.org &#x2014; Where Did Agriculture Come From</span></div></a>
+  <a class="rl" href="https://education.nationalgeographic.org/resource/hunter-gatherer-culture/" target="_blank" rel="noopener"><div class="ico">&#x1F30D;</div><div class="inf"><strong>National Geographic Education: Hunter-Gatherer Culture</strong><span>education.nationalgeographic.org/resource/hunter-gatherer-culture</span></div></a>
+  <div class="qb" id="q3">
+    <div class="ql">&#x270F;&#xFE0F; Katanungan 3</div>
+    <p>Alin ang HINDI isang epekto ng pagtuklas ng apoy?</p>
+    <div class="opts">
+      <button class="obtn" onclick="chk(this,'q3',false)">A. Proteksyon sa mabangis na hayop.</button>
+      <button class="obtn" onclick="chk(this,'q3',false)">B. Pagluluto ng pagkain.</button>
+      <button class="obtn" onclick="chk(this,'q3',true)">C. Kakayahan na magtanim ng pananim.</button>
+      <button class="obtn" onclick="chk(this,'q3',false)">D. Liwanag sa gabi.</button>
+    </div><div class="fb" id="fb-q3"></div>
+  </div>
+  <div class="qb" id="q4">
+    <div class="ql">&#x270F;&#xFE0F; Katanungan 4</div>
+    <p>Bakit mahalaga ang "dibisyon ng trabaho" na resulta ng Neolitikong Rebolusyon?</p>
+    <div class="opts">
+      <button class="obtn" onclick="chk(this,'q4',false)">A. Nagbigay ito ng pagkakataon para maging nomadic muli.</button>
+      <button class="obtn" onclick="chk(this,'q4',true)">B. Nagpahintulot sa mga tao na mag-espesyalisa at mapaunlad ang lipunan.</button>
+      <button class="obtn" onclick="chk(this,'q4',false)">C. Nagbigay ito ng dahilan para lumipat sa mas malamig na lugar.</button>
+      <button class="obtn" onclick="chk(this,'q4',false)">D. Nagpigil sa paggamit ng mga kasangkapan ng bato.</button>
+    </div><div class="fb" id="fb-q4"></div>
+  </div>
+</div>
+
+<div class="card" id="s3">
+  <div class="cl">Seksyon 3 &#xB7; Bahagi 3</div>
+  <h2>&#x1F3A8; Kultura, Sining, at mga Pamana ng mga Unang Tao</h2>
+  <h3>A. Cave Art at Sinaunang Sining</h3>
+  <ul><li><strong>Lascaux Cave</strong> (France) &#x2014; ~17,000 taon gulang; mga pintura ng bison, kabayo, at usa.</li><li><strong>Altamira Cave</strong> (Espanya) &#x2014; ~14,000&#x2013;20,000 taon gulang; kumplikadong mga dibuho ng hayop.</li><li><strong>Sulawesi Cave Art</strong> (Indonesia) &#x2014; ~45,500 taon gulang; isa sa pinakamatandang figurative cave art sa mundo.</li></ul>
+  <div class="ib"><strong>&#x1F1F5;&#x1F1ED; Kaalaman para sa Pilipinas:</strong> Natuklasan din ang sinaunang rock art sa Palawan at Samar &#x2014; patunay na ang mga sinaunang Pilipino ay may mayamang kultura.</div>
+  <h3>B. Animismo at Relihiyon</h3>
+  <p>Ang <strong>animismo</strong> &#x2014; paniniwala na ang lahat ng bagay sa kalikasan ay may kaluluwa o espiritu &#x2014; ay isa sa mga pinakamatandang anyo ng pananampalataya.</p>
+  <ul><li>Nag-alay ng mga hain para mapaboran ang mga espiritu ng kalikasan.</li><li>Nagsagawa ng mga ritwal bago at pagkatapos ng pangangaso.</li><li>Inilibing ang mga patay kasama ang kanilang mga gamit.</li></ul>
+  <div class="ib" style="background:#e8f4e8;border-color:#3a7d44;border-left-color:#2ecc71;"><strong>&#x1F4DC; Pangunahing Sanggunian:</strong> Ang <em>EASE III Modyul 2</em> at ang <em>Kasaysayan ng Daigdig (Batayang Aklat) III, 2000, pp. 64&#x2013;69, 128&#x2013;133</em> (DepEd) ay mga opisyal na sanggunian para sa araling ito.</div>
+  <h3>&#x1F3AC; Video 3: Prehistoric Cave Art (National Geographic)</h3>
+
+<div class="vw">
+  <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/ZjejoT1gFOc"
+    title="Cave Art 101"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<p class="vc">
+  &#x1F4F9; National Geographic. (2018).
+  <em>Cave Art 101</em> [Video]. YouTube.
+  https://youtu.be/ZjejoT1gFOc
+</p>
+
+<h3>&#x1F517; Mga Tunay na Sanggunian Online</h3>
+  <a class="rl" href="https://www.worldhistory.org/Prehistoric_Art/" target="_blank" rel="noopener"><div class="ico">&#x1F3A8;</div><div class="inf"><strong>World History Encyclopedia: Prehistoric Art</strong><span>worldhistory.org/Prehistoric_Art</span></div></a>
+  <a class="rl" href="https://humanorigins.si.edu/evidence/behavior/art-music-and-body-decoration" target="_blank" rel="noopener"><div class="ico">&#x1F3B5;</div><div class="inf"><strong>Smithsonian: Art, Music, and Body Decoration in Early Humans</strong><span>humanorigins.si.edu/evidence/behavior/art-music-and-body-decoration</span></div></a>
+  <a class="rl" href="https://www.ncca.gov.ph/" target="_blank" rel="noopener"><div class="ico">&#x1F1F5;&#x1F1ED;</div><div class="inf"><strong>National Commission for Culture and the Arts (NCCA) &#x2014; Opisyal na Website</strong><span>ncca.gov.ph</span></div></a>
+  <div class="qb" id="q5">
+    <div class="ql">&#x270F;&#xFE0F; Katanungan 5</div>
+    <p>Alin ang pinaka-tumpak na paglalarawan ng <em>animismo</em>?</p>
+    <div class="opts">
+      <button class="obtn" onclick="chk(this,'q5',false)">A. Paniniwala sa isang Diyos na lumikha ng lahat.</button>
+      <button class="obtn" onclick="chk(this,'q5',false)">B. Paniniwala na ang mga hayop lamang ay may kaluluwa.</button>
+      <button class="obtn" onclick="chk(this,'q5',true)">C. Paniniwala na ang lahat ng bagay sa kalikasan ay may kaluluwa o espiritu.</button>
+      <button class="obtn" onclick="chk(this,'q5',false)">D. Pagsamba sa mga lider at hari bilang mga diyos.</button>
+    </div><div class="fb" id="fb-q5"></div>
+  </div>
+  <div class="qb" id="q6">
+    <div class="ql">&#x270F;&#xFE0F; Katanungan 6</div>
+    <p>Bakit mahalaga ang pagprotekta sa mga artefakto at fossil ng mga sinaunang tao?</p>
+    <div class="opts">
+      <button class="obtn" onclick="chk(this,'q6',false)">A. Para mapagkita-kitaan sa mga museo at kumita ng pera.</button>
+      <button class="obtn" onclick="chk(this,'q6',true)">B. Dahil ito ay nagbibigay ng patunay at kaalaman tungkol sa kasaysayan ng tao bilang isang species.</button>
+      <button class="obtn" onclick="chk(this,'q6',false)">C. Para ipakita na ang sinaunang tao ay mas matalino kaysa sa modernong tao.</button>
+      <button class="obtn" onclick="chk(this,'q6',false)">D. Dahil ipinagbabawal ng batas ang pagkawala ng mga ito.</button>
+    </div><div class="fb" id="fb-q6"></div>
+  </div>
+</div>
+
+<div class="card" id="hots">
+  <div class="cl">Seksyon 4 &#xB7; HOTS Gawain</div>
+  <h2>&#x1F9E0; Higher Order Thinking Skills &#x2014; Mga Gawain</h2>
+  <p>Batay sa iyong natutunan, sagutin nang buong-buo ang mga sumusunod. Kailangan ng masusing pagsusuri, paghahambing, at pagbibigay ng iyong sariling pananaw.</p>
+  <div class="hb">
+    <div class="hl">HOTS Gawain 1 &#xB7; Pagsusuri at Paghahambing</div>
+    <h3>&#x1F4CA; Ihambing: Buhay Bago at Pagkatapos ng Rebolusyong Agrikultura</h3>
+    <p>Ilarawan at ihambing ang pamumuhay ng mga tao bago at pagkatapos ng Neolitikong Rebolusyon:</p>
+    <ol><li>Paraan ng pagkuha ng pagkain</li><li>Uri ng tirahan</li><li>Panlipunang estruktura</li><li>Pag-unlad ng kultura at teknolohiya</li></ol>
+    <p><strong>Tanong:</strong> Sa iyong palagay, alin sa mga pagbabago ang pinakamahalaga at bakit?</p>
+    <textarea class="hi" id="h1" placeholder="Isulat dito ang iyong sagot (minimum 5 pangungusap)&#x2026;"></textarea>
+    <button class="sb" onclick="saveH('h1','hs1')">&#x1F4BE; I-save ang Sagot</button>
+    <div id="hs1" style="margin-top:6px;font-size:.78rem;color:var(--green);"></div>
+  </div>
+  <div class="hb">
+    <div class="hl">HOTS Gawain 2 &#xB7; Pagtataya at Pagpapanukala</div>
+    <h3>&#x1F30F; Panukalang Proyekto: Pangangalaga ng mga Sinaunang Pamana</h3>
+    <p>Bilang isang batang Pilipino, bumuo ng isang <strong>panukalang proyekto</strong> para sa pangangalaga ng mga sinaunang pamana. Sagutin:</p>
+    <ol><li>Anong partikular na pamana ang nais mong pangalagaan?</li><li>Bakit ito mahalaga para sa susunod na henerasyon?</li><li>Anong mga hakbang ang dapat gawin upang maprotektahan ito?</li><li>Paano maaaring makatulong ang teknolohiya at ang kabataan?</li></ol>
+    <textarea class="hi" id="h2" placeholder="Isulat dito ang iyong panukalang proyekto (minimum 8 pangungusap)&#x2026;"></textarea>
+    <button class="sb" onclick="saveH('h2','hs2')">&#x1F4BE; I-save ang Sagot</button>
+    <div id="hs2" style="margin-top:6px;font-size:.78rem;color:var(--green);"></div>
+  </div>
+  <div style="text-align:center;margin-top:22px;">
+    <button class="sb" style="font-size:.95rem;padding:13px 32px;background:var(--secondary);" onclick="showCongrats()">&#x1F3C6; Tapusin ang Modyul at Kunin ang Certificate!</button>
+  </div>
+</div>
+
+<div id="certSec">
+  <div class="cs-screen">
+    <div style="font-size:2.8rem;margin-bottom:9px;">&#x1F389;&#x1F3C6;&#x1F38A;</div>
+    <h2>Congratulations!</h2>
+    <p>Natapos mo na ang <strong>Guided Hypermedia Module</strong> tungkol sa Pamumuhay ng mga Unang Tao sa Daigdig! Napakagaling mo! Nagpakita ka ng kahusayan sa pag-aaral at pagsusuri ng kasaysayan.</p>
+    <p>I-type ang iyong pangalan at i-generate ang iyong <strong>Certificate of Completion!</strong></p>
+    <input class="ni" type="text" id="stuName" placeholder="Isulat ang iyong buong pangalan&#x2026;"/>
+    <br/><br/>
+    <button class="cg-btn" onclick="genCert()">&#x1F4DC; I-generate ang Certificate!</button>
+  </div>
+  <div class="cw" id="certBox" style="display:none;">
+    <div class="seal">&#x1F3DB;&#xFE0F;</div>
+    <h2>Certificate of Completion</h2>
+    <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--secondary);margin-bottom:5px;">This is to certify that</div>
+    <div class="sn" id="certName">&#x2014; Pangalan &#x2014;</div>
+    <div class="cl2">has successfully completed the<br/><strong>Guided Hypermedia Learning Module</strong></div>
+    <div class="ct">Pamumuhay ng mga Unang Tao sa Daigdig</div>
+    <div class="cs">Araling Panlipunan 8 &#xB7; AP8HSK-Ie-5 &#xB7; BSED Social Studies 3</div>
+    <div style="margin:9px 0 5px;font-size:.83rem;">Demonstrating knowledge and higher-order thinking skills in the study of</div>
+    <div style="font-size:.87rem;color:var(--primary);font-weight:600;">Early Human Life, Stone Age Periods, and Cultural Heritage Preservation</div>
+    <div style="margin-top:18px;font-size:1.3rem;"><span class="cc">&#x1F31F;</span><span class="cc" style="animation-delay:.3s">&#x1F3C6;</span><span class="cc" style="animation-delay:.6s">&#x1F31F;</span></div>
+    <div class="csig">
+      <div><div class="sl"></div><div>Jhuanna Mae Robles</div><div style="font-size:.7rem;color:var(--secondary);">Gurong Nagsasanay</div></div>
+      <div><div class="sl"></div><div>Zaira Marie Platon</div><div style="font-size:.7rem;color:var(--secondary);">Gurong Nagsasanay</div></div>
+      <div><div class="sl"></div><div>Ivan Rapada</div><div style="font-size:.7rem;color:var(--secondary);">Instructor</div></div>
+    </div>
+    <button class="pbtn" onclick="window.print()">&#x1F5A8;&#xFE0F; I-print ang Certificate</button>
+  </div>
+</div>
+
+<div class="card" id="refs">
+  <div class="cl">Sanggunian</div>
+  <h2>&#x1F4DA; Listahan ng mga Sanggunian (APA 7th Edition)</h2>
+  <h3>Mga Video</h3>
+  <ul>
+    <li style="margin-bottom:6px;">CrashCourse. (2012, January 26). <em>The agricultural revolution: Crash Course World History #1</em> [Video]. YouTube. https://www.youtube.com/watch?v=Yocja_N5s1I</li>
+    <li style="margin-bottom:6px;">CrashCourse. (2014, August 11). <em>Human evolution: Crash Course Big History #6</em> [Video]. YouTube. https://www.youtube.com/watch?v=UPggkvB9_dc</li>
+    <li style="margin-bottom:6px;">National Geographic. (2018). <em>Cave Art 101</em> [Video]. YouTube. https://youtu.be/ZjejoT1gFOc?si=LFct0nhMXpbBsOXp</li>
+  </ul>
+  <h3>Mga Website at Digital na Sanggunian</h3>
+  <ul>
+    <li style="margin-bottom:5px;">Encyclopaedia Britannica. (n.d.). <em>Stone Age.</em> https://www.britannica.com/topic/Stone-Age</li>
+    <li style="margin-bottom:5px;">Kagawaran ng Edukasyon. (2000). <em>Kasaysayan ng daigdig: Batayang aklat III</em> (pp. 64&#x2013;69, 128&#x2013;133). DepEd.</li>
+    <li style="margin-bottom:5px;">Kagawaran ng Edukasyon. (n.d.). <em>EASE III modyul 2: Pamumuhay ng mga sinaunang tao.</em> DepEd.</li>
+    <li style="margin-bottom:5px;">Khan Academy. (n.d.). <em>Where did agriculture come from?</em> https://www.khanacademy.org/humanities/world-history/world-history-beginnings/birth-agriculture-neolithic-revolution/a/where-did-agriculture-come-from</li>
+    <li style="margin-bottom:5px;">Mark, J. J. (2016, December 9). <em>Prehistoric hunter-gatherer societies.</em> World History Encyclopedia. https://www.worldhistory.org/article/991/prehistoric-hunter-gatherer-societies/</li>
+    <li style="margin-bottom:5px;">National Commission for Culture and the Arts. (n.d.). <em>Philippine cultural heritage.</em> https://www.ncca.gov.ph/</li>
+    <li style="margin-bottom:5px;">National Geographic Society. (n.d.). <em>Hunter-gatherer culture.</em> National Geographic Education. https://education.nationalgeographic.org/resource/hunter-gatherer-culture/</li>
+    <li style="margin-bottom:5px;">Natural History Museum. (n.d.). <em>Early humans.</em> https://www.nhm.ac.uk/discover/early-humans.html</li>
+    <li style="margin-bottom:5px;">Smithsonian Institution. (n.d.). <em>Art, music, and body decoration.</em> Human Origins Program. https://humanorigins.si.edu/evidence/behavior/art-music-and-body-decoration</li>
+    <li style="margin-bottom:5px;">Smithsonian Institution. (n.d.). <em>Human evolution evidence.</em> Human Origins Program. https://humanorigins.si.edu/evidence</li>
+    <li style="margin-bottom:5px;">Smithsonian Institution. (n.d.). <em>Introduction to human evolution.</em> Human Origins Program. https://humanorigins.si.edu/education/introduction-human-evolution</li>
+    <li>World History Encyclopedia. (n.d.). <em>Prehistoric art.</em> https://www.worldhistory.org/Prehistoric_Art/</li>
+  </ul>
+</div>
+
+</div>
+<footer><strong>Guided Hypermedia Module &#xB7; Araling Panlipunan 8 &#xB7; AP8HSK-Ie-5</strong><br/>Ginawa nina Jhuanna Mae Robles, Zaira Marie Platon, at Mary Joy Ladan &#xB7; BSED SOCSTUD 3 &#xB7; Instructor: Ivan Rapada</footer>
+<script>
+let sc=0,sv=0;
+function chk(btn,qId,ok){
+  const blk=document.getElementById(qId);
+  blk.querySelectorAll('.obtn').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('fb-'+qId);
+  if(ok){btn.classList.add('correct');fb.textContent='\u2705 Tama! Napakahusay!';fb.style.color='#2ecc71';sc++;upd();}
+  else{btn.classList.add('wrong');fb.textContent='\u274C Hindi tama. Balikan ang nilalaman.';fb.style.color='#e74c3c';}
+}
+function saveH(id,sid){
+  const v=document.getElementById(id).value.trim();
+  const el=document.getElementById(sid);
+  if(v.length<40){el.textContent='\u26A0\uFE0F Pakilagyan ng mas mahabang sagot.';el.style.color='#e67e22';return;}
+  el.textContent='\u2705 Nai-save!';el.style.color='#2d6a4f';sv++;upd();
+}
+function upd(){
+  const pct=5+((sc+sv)/(6+2))*90;
+  document.getElementById('pgbar').style.width=Math.min(pct,95)+'%';
+}
+function showCongrats(){
+  document.getElementById('certSec').style.display='block';
+  document.getElementById('certSec').scrollIntoView({behavior:'smooth'});
+  document.getElementById('pgbar').style.width='100%';
+}
+function genCert(){
+  const n=document.getElementById('stuName').value.trim();
+  if(!n){alert('Isulat muna ang iyong pangalan!');return;}
+  document.getElementById('certName').textContent=n;
+  document.getElementById('certBox').style.display='block';
+  document.getElementById('certBox').scrollIntoView({behavior:'smooth'});
+}
+document.querySelectorAll('nav a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const t=document.querySelector(a.getAttribute('href'));
+  if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+}));
+</script>
+</body>
+</html>
